@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;
 
 public class WordNet {
-    private static final String delimeter = ","; 
+    private static final String DELIMETER = ","; 
     
     private Digraph digraph;
     // A Noun can have multiple nodes i.e. ID's with different descriptions!
@@ -30,7 +30,7 @@ public class WordNet {
         In in = new In(synsets);
         while (!in.isEmpty()) {
             String line = in.readLine();
-            String[] items = line.split(delimeter);
+            String[] items = line.split(DELIMETER);
             
             int id = Integer.valueOf(items[0]);
             String[] nouns = items[1].split(" ");
@@ -50,7 +50,7 @@ public class WordNet {
         digraph = new Digraph(allLines.length);
         
         for (String line : allLines) {
-            String[] ids = line.split(delimeter);
+            String[] ids = line.split(DELIMETER);
             int v = Integer.valueOf(ids[0]);
             for (int i = 1; i < ids.length; i++) {
                 digraph.addEdge(v, Integer.valueOf(ids[i]));
