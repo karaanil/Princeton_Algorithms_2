@@ -1,4 +1,5 @@
 
+import edu.princeton.cs.algs4.Bag;
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.DirectedCycle;
 import edu.princeton.cs.algs4.In;
@@ -8,7 +9,8 @@ public class WordNet {
     private static final String delimeter = ","; 
     
     private Digraph digraph;
-    private final ST<String, Integer> nounST = new ST<String, Integer>();
+    // A Noun can have multiple nodes i.e. ID's with different descriptions!
+    private final ST<String, Bag<Integer>> nounST = new ST<String, Bag<Integer>>();
     private final ST<Integer, String> synsetST = new ST<Integer, String>();
     private SAP sap;
     
@@ -34,7 +36,10 @@ public class WordNet {
             String[] nouns = items[1].split(" ");
             synsetST.put(id, items[1]);
             for (String noun : nouns) {
-                nounST.put(noun, id);
+                if (!nounST.contains(noun)) {
+                    nounST.put(noun, new Bag<Integer>());
+                }
+                nounST.get(noun).add(id);
             }
         }
     }
@@ -90,8 +95,8 @@ public class WordNet {
     {
         validateNull(nounA, nounB, "WorNet sap null input");
         
-        Integer idA = nounST.get(nounA);
-        Integer idB = nounST.get(nounB);
+        Bag<Integer> idA = nounST.get(nounA);
+        Bag<Integer> idB = nounST.get(nounB);
         
         validateNull(idA, idB, "WordNet sap nouns does not exits in synset");
         
@@ -104,8 +109,8 @@ public class WordNet {
     {
         validateNull(nounA, nounB, "WorNet sap null input");
 
-        Integer idA = nounST.get(nounA);
-        Integer idB = nounST.get(nounB);
+        Bag<Integer> idA = nounST.get(nounA);
+        Bag<Integer> idB = nounST.get(nounB);
         
         validateNull(idA, idB, "WordNet sap nouns does not exits in synset");
         
