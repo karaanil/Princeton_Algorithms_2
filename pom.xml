@@ -22,8 +22,7 @@
     </developers>
 
     <modules>
-        <!-- <module>assignment1</module>  -->
-        <module>assignment1</module>
+        <module>hw1_wordnet</module>
     </modules>
 
     <dependencies>
