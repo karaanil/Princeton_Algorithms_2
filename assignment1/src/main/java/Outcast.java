@@ -12,7 +12,7 @@ public class Outcast {
     // given an array of WordNet nouns, return an outcast
     public String outcast(String[] nouns)
     {
-        int minDist = Integer.MAX_VALUE;
+        int maxDist = Integer.MIN_VALUE;
         String outcastNoun = null;
         
         for (String noun : nouns) {
@@ -20,9 +20,9 @@ public class Outcast {
             for (String other : nouns) {
                 dist += wordNet.distance(noun, other);
             }
-            if (dist < minDist) {
+            if (dist > maxDist) {
                 outcastNoun = noun;
-                minDist = dist;
+                maxDist = dist;
             }
         }
         return outcastNoun;

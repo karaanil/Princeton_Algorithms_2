@@ -50,6 +50,9 @@ public class SAP {
    private AncestorNode ancestorNode(Iterable<Integer> v, Iterable<Integer> w){
        validateIterable(v);
        validateIterable(w);
+       if (!v.iterator().hasNext() || !w.iterator().hasNext()) {
+           return new AncestorNode(-1, -1);
+       }
        BreadthFirstDirectedPaths bfsV = new BreadthFirstDirectedPaths(digraph, v);
        BreadthFirstDirectedPaths bfsW = new BreadthFirstDirectedPaths(digraph, w);
        return ancestorNode(bfsV, bfsW);
